@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Nunito", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  --color-bg-main: #0F172A;
+  --color-surface-main: #1E293B;
+  
+  --color-accent-lime: #22C55E;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-purple: #A855F7;
+
+  --shadow-neobrutal: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neobrutal-hover: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+
+  --animate-subtle-float: subtle-float 6s ease-in-out infinite;
+  --animate-node-pulse: node-pulse 2.4s ease-in-out infinite;
+  --animate-data-flow: data-flow 3s ease-in-out infinite;
+
+  @keyframes subtle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes node-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  @keyframes data-flow {
+    0% { transform: translate(0, 0); opacity: 0; }
+    15%, 85% { opacity: 1; }
+    100% { transform: translate(100px, -70px); opacity: 0; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-main);
+  color: #F8FAFC;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent-cyan);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Base Neobrutal classes */
+.neo-card {
+  border: 2px solid #000;
+  border-radius: 16px;
+  box-shadow: var(--shadow-neobrutal);
+  background-color: var(--color-surface-main);
+}
+
+.neo-button {
+  border: 2px solid #000;
+  border-bottom-width: 4px;
+  border-radius: 12px;
+  transition: all 0.1s ease;
+  font-weight: 700;
+}
+
+.neo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 0 #000;
+}
+
+.neo-button:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  box-shadow: none;
+}
+
+@keyframes course-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.course-flow-enter {
+  animation: course-enter 250ms ease-out both;
+}
+
+.course-feedback {
+  animation: course-enter 200ms ease-out both;
+}
+
+.course-page-enter {
+  animation: course-enter 300ms ease-out both;
+}
+
+.history-timeline-track {
+  scrollbar-width: thin;
+  scrollbar-color: #d97706 #0f172a;
+}
+
+.history-timeline-track::-webkit-scrollbar {
+  height: 7px;
+}
+
+.history-timeline-track::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 999px;
+}
+
+.history-timeline-track::-webkit-scrollbar-thumb {
+  background: #d97706;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-flow-enter,
+  .course-feedback,
+  .course-page-enter {
+    animation: none;
+  }
+}
+
