@@ -1,15 +1,22 @@
+import { useRef } from 'react';
 import Hero from '../components/Hero';
-import LearningAreas from '../components/LearningAreas';
-import Methodology from '../components/Methodology';
-import NewsSection from '../components/NewsSection';
+import ModuleShowcase from '../components/landing/ModuleShowcase';
+import LearningExperience from '../components/landing/LearningExperience';
+import { LandingStatement, PracticePreview, LandingManifesto, LandingCTA } from '../components/landing/LandingSections';
+import { useLandingMotion } from '../components/landing/useLandingMotion';
 
 export default function Home() {
+  const root = useRef<HTMLDivElement>(null);
+  useLandingMotion(root);
   return (
-    <>
+    <div className="landing" ref={root}>
       <Hero />
-      <LearningAreas />
-      <Methodology />
-      <NewsSection />
-    </>
+      <LandingStatement />
+      <ModuleShowcase />
+      <LearningExperience />
+      <PracticePreview />
+      <LandingManifesto />
+      <LandingCTA />
+    </div>
   );
 }

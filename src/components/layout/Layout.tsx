@@ -1,15 +1,14 @@
-import { useEffect } from 'react';
+import { Suspense, useLayoutEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { useLanguage } from '../../hooks/useLanguage';
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+import LandingNavigation, { LandingFooter } from '../landing/LandingNavigation';
 
 export default function Layout() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { pathname, hash, search } = useLocation();
   const presenting = pathname === '/learn/history-ai' && new URLSearchParams(search).get('presentation') === 'true';
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const anchor = hash && document.getElementById(hash.slice(1));
     if (anchor) {
       anchor.scrollIntoView();
@@ -26,11 +25,13 @@ export default function Layout() {
       >
         {t('skipToContent')}
       </a>
-      {!presenting && <Navbar />}
+      {!presenting && <LandingNavigation />}
       <main id="main" tabIndex={-1} className="scroll-mt-20 outline-none">
-        <Outlet />
+        <Suspense fallback={<p role="status" className="px-6 py-24 text-center text-slate-300">{lang === 'es' ? 'Cargando el espacio de aprendizaje…' : 'Loading the learning space…'}</p>}>
+          <Outlet />
+        </Suspense>
       </main>
-      {!presenting && <Footer />}
+      {!presenting && <LandingFooter />}
     </>
   );
 }

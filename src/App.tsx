@@ -1,10 +1,11 @@
+import { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 import LanguageProvider from './i18n/LanguageProvider';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Learn from './pages/Learn';
-import ModulePage from './pages/Module';
-import TopicPage from './pages/Topic';
+const ModulePage = lazy(() => import('./pages/Module'));
+const TopicPage = lazy(() => import('./pages/Topic'));
 import Practice from './pages/Practice';
 import Settings from './pages/Settings';
 
