@@ -2,11 +2,13 @@ import { useSyncExternalStore } from 'react';
 import { learningModules } from '../../content/learningModules';
 import { milestones } from '../../content/cyberCourse';
 import { historyActivityIds } from '../../content/historyCourse';
+import { practiceIds } from '../../content/practiceCourse';
 
 // The former roadmap used a different curriculum. Keep its saved data intact.
 const KEY = 'tech-academy:completed-topics';
 const EVENT = 'tech-academy:topic-progress';
 const validIds = new Set<string>([
+  ...practiceIds,
   ...learningModules.flatMap((module) => module.topics.map((topic) => topic.id)),
   ...milestones,
   ...historyActivityIds,
