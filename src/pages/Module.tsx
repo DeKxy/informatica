@@ -5,6 +5,7 @@ import { useCompletedTopics } from '../features/learning/progress';
 import { useLanguage } from '../hooks/useLanguage';
 import CyberCourse from '../components/learning/CyberCourse';
 import HistoryAiCourse from '../components/learning/HistoryAiCourse';
+import CourseExperience from '../components/learning/CourseExperience';
 
 export default function ModulePage() {
   const { moduleSlug } = useParams();
@@ -14,8 +15,8 @@ export default function ModulePage() {
   if (!module) {
     return <section className="max-w-5xl mx-auto px-6 py-20"><h1 className="text-4xl font-bold">{lang === 'es' ? 'Módulo no encontrado' : 'Module not found'}</h1><Link to="/learn" className="text-cyan-300 underline">{lang === 'es' ? 'Volver a Learn' : 'Back to Learn'}</Link></section>;
   }
-  if (module.slug === 'cybersecurity') return <CyberCourse />;
-  if (module.slug === 'history-ai') return <HistoryAiCourse />;
+  if (module.slug === 'cybersecurity') return <CourseExperience slug={module.slug}><CyberCourse /></CourseExperience>;
+  if (module.slug === 'history-ai') return <CourseExperience slug={module.slug}><HistoryAiCourse /></CourseExperience>;
   const cyan = module.accent === 'cyan';
   const count = module.topics.filter((topic) => completed.includes(topic.id)).length;
   return (

@@ -3,6 +3,7 @@ import { historyLessonIds } from '../content/historyCourse';
 import { learningModules, localize } from '../content/learningModules';
 import { setTopicCompleted, useCompletedTopics } from '../features/learning/progress';
 import { useLanguage } from '../hooks/useLanguage';
+import CourseExperience from '../components/learning/CourseExperience';
 
 const formerHistoryTopics: Record<string, string> = {
   'history-origins': 'hci-01', 'history-computers': 'hci-03',
@@ -26,7 +27,7 @@ export default function TopicPage() {
   const previous = module.topics[index - 1];
   const next = module.topics[index + 1];
   return (
-    <article className="max-w-4xl mx-auto px-6 py-12 md:py-20">
+    <CourseExperience slug={module.slug}><article className="max-w-4xl mx-auto px-6 py-12 md:py-20">
       <Link to={`/learn/${module.slug}`} className="text-cyan-300 font-bold hover:underline">← {localize(module.title, lang)}</Link>
       <header className="mt-8 mb-10">
         <p className={`font-mono text-sm uppercase tracking-widest font-bold mb-3 ${cyan ? 'text-cyan-300' : 'text-purple-300'}`}>{lang === 'es' ? 'Tema' : 'Topic'} {index + 1}/{module.topics.length} · {topic.minutes} min</p>
@@ -44,6 +45,6 @@ export default function TopicPage() {
         {previous ? <Link to={`/learn/${module.slug}/${previous.id}`} className="text-cyan-300 font-bold hover:underline">← {localize(previous.title, lang)}</Link> : <span />}
         {next && <Link to={`/learn/${module.slug}/${next.id}`} className="text-cyan-300 font-bold hover:underline">{localize(next.title, lang)} →</Link>}
       </nav>
-    </article>
+    </article></CourseExperience>
   );
 }
